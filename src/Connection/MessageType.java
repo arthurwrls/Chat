@@ -1,7 +1,7 @@
 package Connection;
 
 public enum MessageType {
-    REQUEST_USER_NAME,
+    REQUEST_NAME_USER,
     TEXT_MESSAGE,
     NAME_ACCEPTED,
     USER_NAME,
