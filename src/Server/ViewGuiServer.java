@@ -21,6 +21,9 @@ public class ViewGuiServer {
     protected void initFrameServer() {
         dialogWindow.setEditable(false);
         dialogWindow.setLineWrap(true); // automatic line break in JTextArea
+        frame.add(new JScrollPane(dialogWindow), BorderLayout.CENTER);
+        panelButtons.add(buttonStartServer);
+        panelButtons.add(buttonStopServer);
         frame.add(panelButtons, BorderLayout.SOUTH);
         frame.pack();
         frame.setLocationRelativeTo(null);  //at start, displays the window in the center of the screen

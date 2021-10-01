@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class Message implements Serializable {
     private MessageType typeMessage; //type of message
-    private String textMessage; //text of message
+    private String textMessage;     //text of message
     private Set<String> listUsers; //set of names connected users
 
     public Message(MessageType typeMessage, String textMessage) {
@@ -19,6 +19,7 @@ public class Message implements Serializable {
         this.listUsers = listUsers;
         this.textMessage = null;
     }
+
     public Message(MessageType typeMessage) {
         this.typeMessage = typeMessage;
         this.textMessage = null;

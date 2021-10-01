@@ -1,6 +1,7 @@
 package Client;
 
 import Connection.*;
+
 import java.io.IOException;
 import java.net.Socket;
 
@@ -24,6 +25,7 @@ public class Client {
         Client client = new Client();
         model = new ModelGuiClient();
         gui = new ViewGuiClient(client);
+        gui.initFrameClient();
         while (true) {
             if (client.isConnect()) {
                 client.nameUserRegistration();
@@ -109,23 +111,23 @@ public class Client {
                 if (message.getTypeMessage() == MessageType.USER_ADDED) {
                     model.addUser(message.getTextMessage());
                     gui.refreshListUsers(model.getUsers());
-                    gui.addMessage(String.format("Сервисное сообщение: пользователь %s присоединился к чату.\n", message.getTextMessage()));
+                    gui.addMessage(String.format("Service message: user %s has joined chat.\n", message.getTextMessage()));
                 }
-            //similarly to disable other users
-            if (message.getTypeMessage() == MessageType.REMOVED_USER) {
-                model.removeUser(message.getTextMessage());
+                //similarly to disable other users
+                if (message.getTypeMessage() == MessageType.REMOVED_USER) {
+                    model.removeUser(message.getTextMessage());
+                    gui.refreshListUsers(model.getUsers());
+                    gui.addMessage(String.format("Service message: user %s left chat.\n", message.getTextMessage()));
+                }
+            } catch (Exception e) {
+                gui.errorDialogWindow("Error while receiving a message from the server.");
+                setConnect(false);
                 gui.refreshListUsers(model.getUsers());
-                gui.addMessage(String.format("Сервисное сообщение: пользователь %s покинул чат.\n", message.getTextMessage()));
+                break;
             }
-        } catch(Exception e){
-            gui.errorDialogWindow("Ошибка при приеме сообщения от сервера.");
-            setConnect(false);
-            gui.refreshListUsers(model.getUsers());
-            break;
         }
-    }
 
-}
+    }
 
     //method that implements disconnecting our client from the chat
     protected void disableClient() {

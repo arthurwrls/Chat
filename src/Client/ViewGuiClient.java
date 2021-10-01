@@ -19,7 +19,7 @@ public class ViewGuiClient {
     private JButton buttonDisable = new JButton("Disconnect");
     private JButton buttonConnect = new JButton("Connect");
 
-    ViewGuiClient(Client client) {
+    public ViewGuiClient(Client client) {
         this.client = client;
     }
 
